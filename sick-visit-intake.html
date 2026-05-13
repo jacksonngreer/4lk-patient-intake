@@ -1908,9 +1908,10 @@
     const d = {};
 
     // Phase 1
+    set(d, 'visitType',           'Sick');
     set(d, 'patientFirstName',    val('patientFirstName'));
     set(d, 'patientLastName',     val('patientLastName'));
-    set(d, 'patientDateOfBirth',  val('patientDOB'));
+    set(d, 'patientDOB',          val('patientDOB'));
     set(d, 'guardianFirstName',   val('guardianFirstName'));
     set(d, 'guardianLastName',    val('guardianLastName'));
     set(d, 'guardianPhone',       val('guardianPhone'));
@@ -2327,7 +2328,7 @@
 
     try {
       const res = await fetch(
-        'https://default85c18dba284049eb916ffe5e296458.5b.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/197a6b1fa3464a9da07072db1a90fde1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=tedSQz0SwD1cBl5am0hGb_dG9Tpyl9VqRxYDa9Do0k0',
+        'https://kdckdwh1s7.execute-api.us-east-1.amazonaws.com/intake/submit',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

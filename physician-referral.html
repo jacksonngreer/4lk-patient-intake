@@ -289,9 +289,10 @@
 
   function collectPayload() {
     const d = {};
+    set(d, 'visitType',        'Physician Referral');
     set(d, 'patientFirstName', val('patientFirstName'));
     set(d, 'patientLastName',  val('patientLastName'));
-    set(d, 'patientDOB',     val('patientDOB'));
+    set(d, 'patientDOB',       val('patientDOB'));
     set(d, 'guardianName',   val('guardianName'));
     set(d, 'guardianPhone',  val('guardianPhone'));
     set(d, 'hpiReason',      val('hpiReason'));
@@ -339,9 +340,8 @@
     const payload = collectPayload();
 
     try {
-      const POWER_AUTOMATE_URL = 'https://default85c18dba284049eb916ffe5e296458.5b.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/ad9f588c858f4cc8a8b81bf724874ba4/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=80IZluFoIGRt_npzNJYfYJujzBbn9uhCznqLTKtqQ5g';
-
-      const res = await fetch(POWER_AUTOMATE_URL, {
+      const res = await fetch(
+        'https://kdckdwh1s7.execute-api.us-east-1.amazonaws.com/intake/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
