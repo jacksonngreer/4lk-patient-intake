@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4LK Healthcare – Book an Appointment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:       #3a8fa8;
+      --primary-light: #e8f6fa;
+      --accent:        #edde35;
+      --accent-hover:  #d9cb1e;
+      --danger:        #d93025;
+      --text:          #1c2226;
+      --text-muted:    #7a8490;
+      --border:        #ddd8c4;
+      --bg:            #faf8f0;
+      --white:         #ffffff;
+      --radius:        16px;
+      --shadow:        0 2px 18px rgba(0,0,0,0.06);
+      --shadow-lift:   0 8px 32px rgba(0,0,0,0.10);
+    }
+
+    html, body { min-height: 100%; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      padding: 14px 0 14px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.2px;
+      flex-shrink: 0;
+    }
+    .nav-brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+    .nav-brand span { line-height: 1.1; }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+    .nav a.nav-link {
+      display: inline-block;
+      padding: 8px 12px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      border-radius: 999px;
+      transition: background 0.16s, color 0.16s;
+    }
+    .nav a.nav-link:hover {
+      background: var(--primary-light);
+      color: var(--text);
+    }
+    @media (max-width: 640px) {
+      .nav-inner { justify-content: center; }
+      .nav-links { justify-content: center; }
+      .nav-brand { width: 100%; justify-content: center; }
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 8px 16px 4px;
+    }
+    .hero-logo {
+      width: min(420px, 78vw);
+      height: auto;
+      margin: 0 auto -8px;
+      display: block;
+    }
+    .hero h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .hero .sub {
+      font-size: 1.05rem;
+      color: var(--text);
+      font-weight: 400;
+      max-width: 560px;
+      margin: 0 auto;
+      text-wrap: pretty;
+    }
+
+    /* ── Intake card ── */
+    .intake {
+      background: var(--white);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 36px 28px 32px;
+      margin: 28px auto 36px;
+      border-top: 5px solid var(--accent);
+      scroll-margin-top: 16px;
+    }
+    .intake-head {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 26px;
+    }
+    .intake-head h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .intake-head p {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 400;
+      text-wrap: pretty;
+    }
+
+    /* ── Form card links (BUTTONS — most prominent) ── */
+    .forms-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 720px) {
+      .forms-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .form-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 22px;
+      text-decoration: none;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.14s, background 0.18s;
+      min-height: 88px;
+    }
+    @media (min-width: 720px) {
+      .form-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 24px;
+        min-height: 200px;
+      }
+    }
+    .form-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 28px rgba(237,222,53,0.28);
+      transform: translateY(-3px);
+    }
+    .form-card:active { transform: translateY(0); }
+    .form-card:focus-visible {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    .form-card-icon {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .form-card-body { flex: 1; }
+    @media (min-width: 720px) {
+      .form-card-body { flex: 1 1 auto; width: 100%; }
+    }
+    .form-card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .form-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .form-card-arrow {
+      flex-shrink: 0;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      transition: color 0.16s, transform 0.16s;
+      align-self: center;
+    }
+    @media (min-width: 720px) {
+      .form-card-arrow {
+        align-self: flex-end;
+        margin-top: auto;
+      }
+    }
+    .form-card:hover .form-card-arrow {
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    /* ── Contact strip ── */
+    .contact {
+      text-align: center;
+      padding: 8px 16px 28px;
+    }
+    .contact h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .contact p {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .contact a.email {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.16s;
+    }
+    .contact a.email:hover { border-bottom-color: var(--primary); }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: auto;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 8px 0;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    @media (min-width: 720px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .footer-brand img { width: auto; height: 64px; object-fit: contain; display: block; }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .footer-social a {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      text-decoration: none;
+      transition: background 0.16s, color 0.16s, transform 0.14s;
+    }
+    .footer-social a:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+    .footer-social svg { width: 18px; height: 18px; }
+    .footer-email {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .footer-email a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-email a:hover { text-decoration: underline; }
+
+    /* ── Mobile tightening ── */
+    @media (max-width: 520px) {
+      .hero { padding-top: 6px; }
+      .hero-logo { width: 78vw; margin-bottom: -6px; }
+      .hero h1 { font-size: 1.65rem; }
+      .hero .sub { font-size: 0.98rem; }
+      .intake { padding: 28px 18px 24px; margin: 20px auto 28px; border-radius: 18px; }
+      .nav a.nav-link { padding: 7px 10px; font-size: 0.86rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Top Nav -->
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="https://www.fourluckykids.com/" aria-label="Four Lucky Kids Healthcare home">
+      <span>Four Lucky Kids Healthcare</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="https://www.fourluckykids.com/#dataItem-mdeumnde">About</a>
+      <a class="nav-link" href="https://www.fourluckykids.com/services-9">Services</a>
+      <a class="nav-link" href="#book">Book Appointment</a>
+      <a class="nav-link" href="https://www.fourluckykids.com/providers">Providers</a>
+      <a class="nav-link" href="https://www.fourluckykids.com/safety-questionnaire">Safety</a>
+      <a class="nav-link" href="https://www.fourluckykids.com/general-5">Forms</a>
+      <a class="nav-link" href="https://www.fourluckykids.com/contact-us">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero wrap">
+  <img class="hero-logo" src="./4lk-logo.avif" alt="4LK Healthcare">
+  <h1>Yes, house calls are back!</h1>
+  <p class="sub">We provide acute high level medical care in the comfort of your home.</p>
+</header>
+
+<!-- Intake card (the primary action of the page) -->
+<main class="wrap">
+  <section id="book" class="intake" aria-labelledby="intake-title">
+    <div class="intake-head">
+      <h2 id="intake-title">Book an Appointment</h2>
+      <p>Select the type of visit below and complete your patient intake form. Once submitted, you'll receive a scheduling link with next-step instructions.</p>
+    </div>
+
+    <div class="forms-grid">
+
+      <a href="https://intake.fourluckykids.com/sick-visit-intake.html" class="form-card">
+        <div class="form-card-body">
+          <div class="form-card-title">Sick Visit Intake</div>
+          <div class="form-card-desc">For a sick or urgent care visit.</div>
+        </div>
+        <div class="form-card-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://intake.fourluckykids.com/well-visit-intake.html" class="form-card">
+        <div class="form-card-body">
+          <div class="form-card-title">Well Visit Intake</div>
+          <div class="form-card-desc">For a routine well-child or wellness visit.</div>
+        </div>
+        <div class="form-card-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://intake.fourluckykids.com/physician-referral.html" class="form-card">
+        <div class="form-card-body">
+          <div class="form-card-title">Physician Referral</div>
+          <div class="form-card-desc">For a referral from an outside physician or specialist.</div>
+        </div>
+        <div class="form-card-arrow" aria-hidden="true">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Contact strip -->
+  <section class="contact" aria-labelledby="contact-title">
+    <h3 id="contact-title">Questions?</h3>
+    <p>Email us at <a class="email" href="mailto:wp@fourluckykids.com">wp@fourluckykids.com</a></p>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="./4lk-logo-with-text-cropped.png" alt="4LK Healthcare">
+    </div>
+
+    <div class="footer-social" aria-label="Social links">
+      <a href="https://www.instagram.com/fourluckykids_healthcare/" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle>
+        </svg>
+      </a>
+    </div>
+
+    <div class="footer-email">
+      <a href="mailto:wp@fourluckykids.com">wp@fourluckykids.com</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
