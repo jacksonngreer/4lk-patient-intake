@@ -1,0 +1,11 @@
+{
+  "name": "4lk-intake-submit",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Lambda handler for patient intake form submission",
+  "main": "index.mjs",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.0.0",
+    "@aws-sdk/client-s3": "^3.0.0"
+  }
+}
